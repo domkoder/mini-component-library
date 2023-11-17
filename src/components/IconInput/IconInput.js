@@ -10,13 +10,14 @@ const IconInput = ({ label, icon, width = 250, size, placeholder }) => {
 	const styles = SIZE[size]
 	if (!styles) throw new Error('Select valid size')
 	return (
-		<Wrapper style={{ '--width': width + 'px' }}>
+		<Wrapper style={{ '--width': width + 'px' }} htmlFor={label}>
 			<TextInput
 				placeholder={placeholder}
 				style={{
 					'--padding': styles.padding,
 					'--font-size': styles.fontSize + 'rem',
 				}}
+				id={label}
 			/>
 			<VisuallyHidden>{`${label} input`}</VisuallyHidden>
 			<IconWrapper style={{ '--size': styles.iconSize + 'px' }}>
@@ -40,9 +41,10 @@ const SIZE = {
 	},
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.label`
 	position: relative;
 	width: var(--width);
+	display: block;
 	/* border: 1px solid red; */
 `
 const TextInput = styled.input`
@@ -72,5 +74,6 @@ const IconWrapper = styled.div`
 	margin: auto;
 	height: var(--size);
 	width: var(--size);
+	/* pointer-events: none; */
 `
 export default IconInput
